@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation=
+       "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+ 
+ 	<!-- 打开Spring的Annotation支持 -->
+	<context:annotation-config />
+	<!-- 设定Spring 去哪些包中找Annotation -->
+	<context:component-scan base-package="blog.wl" />
+	       
+  <bean id="dataSource"
+    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+    <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+    <property name="username" value="WLSPRING" />
+    <property name="password" value="123456" />
+  </bean>
+
+  <bean id="sessionFactory"
+    class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <!-- 为sessionFactory注入dataSource -->
+    <property name="dataSource" ref="dataSource" />
+    <!-- 常用hibernate配置 -->
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+        <prop key="hibernate.hbm2ddl.auto">update</prop>
+        <prop key="hibernate.show_sql">true</prop>
+        <prop key="hiberante.format_sql">true</prop>
+      </props>
+    </property>
+    <!-- 加载用于生成数据库中表的hibernate配置文件。 -->
+    <property name="configLocations">
+      <list>
+        <value>
+          classpath*:hibernate/hibernate.cfg.xml
+        </value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="transactionManager"
+    class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory"></property>
+  </bean>
+
+  <!-- 事务管理 、当使用spring为每个Controller注入属性时引用此bean、为其添加事务管理 -->
+  <bean id="transactionBese"
+    class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+    lazy-init="true" abstract="true">
+    <property name="transactionManager" ref="transactionManager"></property>
+<!--     根据不同的操作开启不同的事务管理方式 -->
+    <property name="transactionAttributes">
+      <props>
+        <prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>
+        <prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
+        <prop key="insert*">PROPAGATION_REQUIRED,-Exception</prop>
+        <prop key="modify*">PROPAGATION_REQUIRED,-Exception</prop>
+        <prop key="delete*">PROPAGATION_REQUIRED,-Exception</prop>
+        <prop key="get*">PROPAGATION_NEVER</prop>
+      </props>
+    </property>
+  </bean>
+  
+
+</beans>

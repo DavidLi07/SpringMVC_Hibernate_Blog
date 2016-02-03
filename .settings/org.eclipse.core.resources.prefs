@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/aboutme.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/album.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/article.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/articledetail.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/error.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/index.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/information.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/login.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/manager/aboutme.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/manager/aboutmeedit.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/manager/article.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/manager/articleedit.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/manager/index.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/manager/message.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/message.jsp=UTF-8

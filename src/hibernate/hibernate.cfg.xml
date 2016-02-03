@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+    	<!-- 用于关联表的实体类 -->
+        <mapping class="blog.wl.model.User"/>
+        <mapping class="blog.wl.model.UserInfo"/>
+        <mapping class="blog.wl.model.Album"/>
+        <mapping class="blog.wl.model.Message"/>
+            
+<!--         <mapping resource="blog/wl/model/User.hbm.xml"></mapping> -->
+
+    </session-factory>
+</hibernate-configuration>
